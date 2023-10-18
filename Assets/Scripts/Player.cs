@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     private float _minHealth = 0;
+    private float _heal = 12.5f;
+    private float _damage = 10f;
 
+    public UnityAction HealthChanged;
     public float MaxHealth { get; private set; } = 100f;
     public float Health { get; private set; }
 
@@ -14,21 +18,24 @@ public class Player : MonoBehaviour
         Health = MaxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage()
     {
-        Health -= damage;
+        Health -= _damage;
 
         if (Health < 0)
             Health = _minHealth;
+
+        HealthChanged?.Invoke();
     }
 
-    public void Heal(float newHealth)
+    public void Heal()
     {
-        Health += newHealth;
+        Health += _heal;
 
         if(Health > MaxHealth)
-        {
             Health = MaxHealth;
-        }
+        
+
+        HealthChanged?.Invoke();
     }
 }
