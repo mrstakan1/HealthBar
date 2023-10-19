@@ -33,8 +33,6 @@ public class HealthBar : MonoBehaviour
         float currentValue = _slider.value;
         float currentTime = 0f;
 
-        Debug.Log("-");
-
         while(currentTime < _time)
         {
             currentTime += Time.deltaTime;
@@ -48,8 +46,6 @@ public class HealthBar : MonoBehaviour
     {
         float currentValue = _slider.value;
         float currentTime = 0f;
-
-        Debug.Log("+");
 
         while (currentTime < _time)
         {
