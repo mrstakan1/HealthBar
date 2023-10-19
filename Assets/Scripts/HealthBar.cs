@@ -9,14 +9,20 @@ public class HealthBar : MonoBehaviour
 
     private float _animationTime = 1f;
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        _player.HealthChanged = OnHealthChanging;
+        _player.HealthChanged += OnHealthChanging;
+    }
+
+    private void OnDisable()
+    {
+        _player.HealthChanged -= OnHealthChanging;
     }
 
     private void OnHealthChanging()
     {
         float newHealth = _player.Health / _player.MaxHealth;
         _image.DOFillAmount(newHealth, _animationTime);
+
     }
 }
