@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private HealthBar _healthBar;
+
     private float _minHealth = 0;
     private float _heal = 12.5f;
     private float _damage = 10f;
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
             Health = _minHealth;
 
         HealthChanged?.Invoke();
+        _healthBar.StartHealthDecreasing(Health);
     }
 
     public void Heal()
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
         if(Health > MaxHealth)
             Health = MaxHealth;
         
-
         HealthChanged?.Invoke();
+        _healthBar.StartHealthIncreasing(Health);
     }
 }
