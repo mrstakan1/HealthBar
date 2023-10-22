@@ -8,7 +8,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private Slider _slider;
 
-    private float _time = 0.1f;
+    private float _time = 0.25f;
 
     private void Start()
     {
@@ -25,22 +25,21 @@ public class HealthBar : MonoBehaviour
         _player.HealthChanged -= StartHealthBarChanging;
     }
 
-    private void StartHealthBarChanging()
+    private void StartHealthBarChanging(float newHealth)
     {
-        StartCoroutine(ChangeHealthBar());
+        StartCoroutine(ChangeHealthBar(newHealth));
     }
 
-    private IEnumerator ChangeHealthBar()
+    private IEnumerator ChangeHealthBar(float newHealth)
     {
         float currentValue = _slider.value;
-        float newHealth = _player.Health;
         float currentTime = 0f;
 
         while (currentTime < _time)
         {
             currentTime += Time.deltaTime;
             float lerpValue = (currentTime / _time);
-            _slider.value = Mathf.Lerp(currentValue, newHealth, lerpValue); // как получить newHealth
+            _slider.value = Mathf.Lerp(currentValue, newHealth, lerpValue);
             yield return null;
         }
     }

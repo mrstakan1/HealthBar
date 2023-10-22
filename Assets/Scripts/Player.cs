@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private float _heal = 12.5f;
     private float _damage = 10f;
 
-    public UnityAction HealthChanged;
+    public UnityAction<float> HealthChanged;
     public float MaxHealth { get; private set; } = 100f;
     public float Health { get; private set; }
 
@@ -20,21 +20,18 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
-        Health -= _damage;
-
-        if (Health < 0)
-            Health = _minHealth;
-
-        HealthChanged?.Invoke();
+        ChangeHealth(- _damage);
     }
 
     public void Heal()
     {
-        Health += _heal;
+        ChangeHealth(_heal);
+    }
 
-        if(Health > MaxHealth)
-            Health = MaxHealth;
-        
-        HealthChanged?.Invoke();
+    private void ChangeHealth(float changingValue)
+    {
+        Health += changingValue;
+        Health = Mathf.Clamp(Health, _minHealth, MaxHealth);
+        HealthChanged?.Invoke(Health);
     }
 }

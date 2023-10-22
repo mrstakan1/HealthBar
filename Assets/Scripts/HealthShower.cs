@@ -18,8 +18,8 @@ public class HealthShower : MonoBehaviour
         _player.HealthChanged -= OnHealthChanging;
     }
 
-    private void OnHealthChanging()
+    private void OnHealthChanging(float newHealth)
     {
-        _healthText.text = "HP: " + _player.Health.ToString();
+        _healthText.text = "HP: " + newHealth.ToString();
     }
 }
