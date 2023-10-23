@@ -6,8 +6,6 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     private float _minHealth = 0;
-    private float _heal = 12.5f;
-    private float _damage = 10f;
 
     public UnityAction<float> HealthChanged;
     public float MaxHealth { get; private set; } = 100f;
