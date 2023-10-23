@@ -9,6 +9,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider _slider;
 
     private float _time = 0.25f;
+    private Coroutine _currentCoroutine = null;
 
     private void Start()
     {
@@ -27,7 +28,10 @@ public class HealthBar : MonoBehaviour
 
     private void StartHealthBarChanging(float newHealth)
     {
-        StartCoroutine(ChangeHealthBar(newHealth));
+        if(_currentCoroutine != null)
+            StopCoroutine(_currentCoroutine);
+
+        _currentCoroutine = StartCoroutine(ChangeHealthBar(newHealth));
     }
 
     private IEnumerator ChangeHealthBar(float newHealth)

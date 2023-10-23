@@ -18,14 +18,14 @@ public class Player : MonoBehaviour
         Health = MaxHealth;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-        ChangeHealth(- _damage);
+        ChangeHealth(-damage);
     }
 
-    public void Heal()
+    public void Heal(float heal)
     {
-        ChangeHealth(_heal);
+        ChangeHealth(heal);
     }
 
     private void ChangeHealth(float changingValue)
